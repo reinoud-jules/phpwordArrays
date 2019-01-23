@@ -31,13 +31,14 @@ class TextRun extends Text
      */
     public function write()
     {
-        $content = '';
-
-        $content .= $this->writeOpening();
         $writer = new Container($this->parentWriter, $this->element);
-        $content .= $writer->write();
-        $content .= $this->writeClosing();
 
-        return $content;
+        $opening = $this->writeOpening();
+        $type = $this->fetchType($opening);
+
+        return array(
+            'type' => $type, 
+            'content' => $writer->write()
+        );
     }
 }

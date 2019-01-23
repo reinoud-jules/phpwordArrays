@@ -83,4 +83,24 @@ abstract class AbstractElement
     {
         $this->withoutP = $value;
     }
+
+    public function fetchType($htmlTag)
+    {
+        // Does not contain HTML tag
+        if($htmlTag == strip_tags($htmlTag))
+        {
+            return FALSE;
+        }
+
+        $parts = explode('<', $htmlTag);
+
+        // No tag found
+        if(count($parts) == 0)
+        {
+            return FALSE;
+        }
+
+        // Strip data-attributes and inline styles
+        return explode(' ', $parts[1])[0];
+    }
 }

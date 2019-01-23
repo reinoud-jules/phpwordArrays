@@ -50,7 +50,7 @@ class Associative extends AbstractWriter implements WriterInterface
 
         $this->parts = array('Head', 'Body');
         foreach ($this->parts as $partName) {
-            $partClass = 'PhpOffice\\PhpWord\\Writer\\HTML\\Part\\' . $partName;
+            $partClass = 'PhpOffice\\PhpWord\\Writer\\Associative\\Part\\' . $partName;
             if (class_exists($partClass)) {
                 /** @var \PhpOffice\PhpWord\Writer\HTML\Part\AbstractPart $part Type hint */
                 $part = new $partClass();
@@ -88,16 +88,6 @@ class Associative extends AbstractWriter implements WriterInterface
         return $content;
     }
 
-
-    /**
-     * Get is PDF
-     *
-     * @return bool
-     */
-    public function isPdf()
-    {
-        return $this->isPdf;
-    }
 
     /**
      * Get notes

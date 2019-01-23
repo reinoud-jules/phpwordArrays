@@ -46,7 +46,7 @@ class Container extends AbstractElement
         }
         $containerClass = substr(get_class($container), strrpos(get_class($container), '\\') + 1);
         $withoutP = in_array($containerClass, array('TextRun', 'Footnote', 'Endnote')) ? true : false;
-        $content = '';
+        $content = array();
 
         $elements = $container->getElements();
         foreach ($elements as $element) {
@@ -55,7 +55,7 @@ class Container extends AbstractElement
             if (class_exists($writerClass)) {
                 /** @var \PhpOffice\PhpWord\Writer\Associative\Element\AbstractElement $writer Type hint */
                 $writer = new $writerClass($this->parentWriter, $element, $withoutP);
-                $content .= $writer->write();
+                $content[] = $writer->write();
             }
         }
 

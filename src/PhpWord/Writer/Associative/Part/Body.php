@@ -36,17 +36,15 @@ class Body extends AbstractPart
     {
         $phpWord = $this->getParentWriter()->getPhpWord();
 
-        $content = '';
+        $content = array('sections' => array());
 
-        $content .= '<body>' . PHP_EOL;
         $sections = $phpWord->getSections();
         foreach ($sections as $section) {
             $writer = new Container($this->getParentWriter(), $section);
-            $content .= $writer->write();
+            $content['sections'][] = $writer->write();
         }
 
-        $content .= $this->writeNotes();
-        $content .= '</body>' . PHP_EOL;
+        $content['notes'] = $this->writeNotes();
 
         return $content;
     }
