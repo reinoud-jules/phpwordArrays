@@ -79,11 +79,17 @@ class Text extends AbstractElement
         } else {
             $content .= $element->getText();
         }
-        $content .= $this->closingTags;
-        $content .= $this->closingText;
-        $content .= $this->writeClosing();
+        // $content .= $this->closingTags;
+        // $content .= $this->closingText;
+        // $content .= $this->writeClosing();
 
-        return $content;
+        $opening = $this->openingTags;
+        $type = $this->fetchType($opening);
+
+        return array(
+            'type' => $type,
+            'content' => $content
+        );
     }
 
     /**
