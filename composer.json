@@ -1,6 +1,6 @@
 {
-    "name": "phpoffice/phpword",
-    "description": "PHPWord - A pure PHP library for reading and writing word processing documents (OOXML, ODF, RTF, HTML, PDF)",
+    "name": "studiorj/phpword",
+    "description": "PHPWordAssociative - An extension of PHPWord which can also parse Word files to Associative arrays.",
     "keywords": [
         "PHP", "PHPOffice", "office", "PHPWord", "word", "template", "template processor", "reader", "writer",
         "docx", "OOXML", "OpenXML", "Office Open XML", "ISO IEC 29500", "WordprocessingML",
@@ -32,6 +32,9 @@
         },
         {
             "name": "Antoine de Troostembergh"
+        },
+        {
+            "name": "Reinoud Schuijers"
         }
     ],
     "scripts": {
