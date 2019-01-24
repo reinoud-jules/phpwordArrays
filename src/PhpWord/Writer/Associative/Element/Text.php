@@ -59,6 +59,9 @@ class Text extends AbstractElement
      */
     private $closingTags = '';
 
+    private $style = array();
+    private $tag = '';
+
     /**
      * Write text
      *
@@ -68,12 +71,12 @@ class Text extends AbstractElement
     {
         /** @var \PhpOffice\PhpWord\Element\Text $element Type hint */
         $element = $this->element;
-        $this->getFontStyle();
+        $this->getStyleAndTag();
 
         $content = '';
         $content .= $this->writeOpening();
-        $content .= $this->openingText;
-        $content .= $this->openingTags;
+        //$content .= $this->openingText;
+        //$content .= $this->openingTags;
         if (Settings::isOutputEscapingEnabled()) {
             $content .= $this->escaper->escapeHtml($element->getText());
         } else {
@@ -87,8 +90,9 @@ class Text extends AbstractElement
         $type = $this->fetchType($opening);
 
         return array(
-            'type' => $type,
-            'content' => $content
+            'type' => $this->tag,
+            'content' => $content,
+            'style' => $this->style
         );
     }
 
@@ -249,23 +253,16 @@ class Text extends AbstractElement
     /**
      * Get font style.
      */
-    private function getFontStyle()
+    private function getStyleAndTag()
     {
         /** @var \PhpOffice\PhpWord\Element\Text $element Type hint */
         $element = $this->element;
-        $style = '';
         $fontStyle = $element->getFontStyle();
         $fStyleIsObject = ($fontStyle instanceof Font);
         if ($fStyleIsObject) {
             $styleWriter = new FontStyleWriter($fontStyle);
-            $style = $styleWriter->write();
-        } elseif (is_string($fontStyle)) {
-            $style = $fontStyle;
-        }
-        if ($style) {
-            $attribute = $fStyleIsObject ? 'style' : 'class';
-            $this->openingTags = "<span {$attribute}=\"{$style}\">";
-            $this->closingTags = '</span>';
-        }
+            $this->style = $styleWriter->write();
+            $this->tag = 'span';
+        } 
     }
 }
