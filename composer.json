@@ -1,5 +1,5 @@
 {
-    "name": "studiorj/phpword",
+    "name": "reinoud-jules/phpword",
     "description": "PHPWordAssociative - An extension of PHPWord which can also parse Word files to Associative arrays.",
     "keywords": [
         "PHP", "PHPOffice", "office", "PHPWord", "word", "template", "template processor", "reader", "writer",
